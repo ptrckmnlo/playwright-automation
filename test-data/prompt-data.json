@@ -1,0 +1,10 @@
+{
+    "success": {
+            "accountCreateSuccess": "Congratulations! Your new account has been successfully created!",
+            "deleteAccountSuccess": "Your account has been permanently deleted!"
+    },
+    "error": {
+            "emailAlreadyExist": "Email Address already exist!"
+    }
+    
+}

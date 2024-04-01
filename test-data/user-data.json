@@ -1,0 +1,57 @@
+{
+    "users": [
+        {
+            "name": "John Doe",
+            "email": "john@testmail.com",
+            "password": "qwerty"
+        },
+        {
+            "name": "Jane Doe",
+            "email": "jane@test.com",
+            "password": "abc123"
+        },
+        {
+            "name": "Pat Test",
+            "email": "pat1@test.com",
+            "password": "test",
+            "incorrectPw": "123"
+        }
+    ],
+
+    "signUpData": [
+        {
+            "salutation": 0,
+            "password": "test123",
+            "birthDay": "25",
+            "birthMonth": "December",
+            "birthYear": "2000",
+            "firstName": "John",
+            "lastName": "Doe",
+            "company": "Test Company 1",
+            "address": "4684 Henri Hollow Apt. 952",
+            "country": "United States",
+            "state": "Montana",
+            "city": "New Caseybury",
+            "zip": "46572-3652",
+            "phoneNumber": "+1 (909) 591-7454"
+        },
+
+        {
+            "salutation": 1,
+            "password": "test123",
+            "birthDay": "1",
+            "birthMonth": "May",
+            "birthYear": "2000",
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "company": "Test Company 2",
+            "address": "8 Altenwerth Court",
+            "country": "New Zealand",
+            "state": "Alabama",
+            "city": "Laurynston",
+            "zip": "4840",
+            "phoneNumber": "09 389 4451"
+        }
+    ]
+}
+
