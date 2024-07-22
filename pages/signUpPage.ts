@@ -1,6 +1,37 @@
-exports.SignUpPage = class SignUpPage {
+import { type Locator, type Page } from "@playwright/test"
 
-    constructor(page) {
+export default class SignUpPage {
+    readonly page: Page
+    readonly signUpLogIn: Locator
+    readonly signUpForm: Locator
+    readonly signUpName: Locator
+    readonly signUpEmail: Locator
+    readonly signUpBtn: Locator
+    readonly loggedInAs: Locator
+    readonly emailExistMsg: Locator
+    readonly title: Locator
+    readonly passwordField: Locator
+    readonly selectBirthDay: Locator
+    readonly selectBirthMonth: Locator
+    readonly selectBirthYear: Locator
+    readonly newsletterConsent: Locator
+    readonly receivedOfferConsent: Locator
+    readonly firstName: Locator
+    readonly lastName: Locator
+    readonly companyField: Locator
+    readonly addressField: Locator
+    readonly countryField: Locator
+    readonly stateField: Locator
+    readonly cityField: Locator
+    readonly zipCodeField: Locator
+    readonly mobileNumberField: Locator
+    readonly createAcctBtn: Locator
+    readonly acctSuccessMsg: Locator
+    readonly continueBtn: Locator
+    readonly deleteBtn: Locator
+    readonly deleteSuccessMsg: Locator
+
+    constructor(page: Page) {
         this.page = page;
         this.signUpLogIn = page.getByRole('link', {name: ' Signup / Login'});
         this.signUpForm = page.locator('.signup-form');
@@ -44,7 +75,7 @@ exports.SignUpPage = class SignUpPage {
     }
 
     async gotoPage() {
-        await this.page.goto('https://automationexercise.com')
+        await this.page.goto('/')
     }
 
     async gotoSignUp() {

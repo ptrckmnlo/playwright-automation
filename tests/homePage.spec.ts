@@ -1,6 +1,6 @@
-import { test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test.beforeEach( async ({page}) => {
+test.beforeEach( async ({ page }) => {
     await page.goto('https://automationexercise.com/');
 });  
 
@@ -27,16 +27,12 @@ test('Verify each menu tab title and links are correct', async ({ page }) => {
 
     for (const [index, listItem] of expectedTabLinks.entries()) {
         const link = listItems.nth(index).locator('a');
-
         await expect(link).toHaveText(listItem.text);
         await expect(link).toHaveAttribute('href', listItem.href);
     }
 
-test.afterAll(async ({ page }) => {         
-    await page.close();     
-}); 
-
 })
 
-
-
+test.afterAll( async ({ page }) => {         
+    await page.close();     
+}); 

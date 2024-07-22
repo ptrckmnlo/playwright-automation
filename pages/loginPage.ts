@@ -1,6 +1,18 @@
-exports.LoginPage = class LoginPage {
+import { type Locator, type Page } from "@playwright/test"
 
-    constructor(page) {
+export default class LoginPage {
+    readonly page: Page
+    readonly signUpLogIn: Locator
+    readonly emailField: Locator
+    readonly passwordField: Locator
+    readonly loginBtn: Locator
+    readonly loginForm: Locator
+    readonly loggedInAs: Locator
+    readonly errorMsg: Locator
+    readonly logoutBtn: Locator
+    
+
+    constructor(page: Page) {
         this.page = page
         this.signUpLogIn = page.getByRole('link', {name: ' Signup / Login'});
         this.emailField = page.locator('input[data-qa="login-email"]');
@@ -13,7 +25,7 @@ exports.LoginPage = class LoginPage {
     }
 
     async gotoPage() {
-        await this.page.goto('https://automationexercise.com')
+        await this.page.goto('/')
     }
 
     async gotoLoginPage() {

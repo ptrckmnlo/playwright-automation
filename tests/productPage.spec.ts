@@ -1,68 +1,59 @@
-import { test, expect } from '@playwright/test';
-import { ProductsPage } from '../pages/products.js';
-import { CartPage } from '../pages/cart.js';
+import { test, expect } from '../fixtures/pomFixture.ts';
+// import { ProductsPage } from '../pages/productPage.js';
+// import { CartPage } from '../pages/cartPage.js';
 
 
-test.beforeEach( async ({ page }) => {
-    const Products = new ProductsPage(page);
-    await Products.gotoPage()
+test.beforeEach( async ({ productsPage }) => {
+    await productsPage.gotoPage()
 })
 test.describe('Products Page Test Suite', () => {
     
-    test('1. Verify All Products and product detail page', async ({ page }) => {
-        const Products = new ProductsPage(page);
-        await Products.navigateToProducts()
-        await Products.viewAProduct(0)
-        await Products.checkProductDetails(
+    test('1. Verify All Products and product detail page', async ({ productsPage }) => {
+        await productsPage.navigateToProducts()
+        await productsPage.viewAProduct(0)
+        await productsPage.checkProductDetails(
             'Blue Top', /Women > Tops/, /Rs. 500/,
             /In Stock/, /New/, /Polo/
         );
     })
     
-    test('2. Verify Search Product functionality', async ({ page }) => {
-        const Products = new ProductsPage(page);
-        await Products.navigateToProducts();
-        
-        await Products.searchProduct('women');
-        const names = await Products.productCardNames.all()
+    test('2. Verify Search Product functionality', async ({ productsPage }) => {
+        await productsPage.navigateToProducts();
+        await productsPage.searchProduct('women');
+        const names = await productsPage.productCardNames.all()
         for (const name of names) {
             await expect(name).toContainText(/Women/);
         }
     })
 
-    test('3. Verify Add Products in Cart', async ({ page }) => {
-        const Products = new ProductsPage(page);
-        const Cart = new CartPage(page)
-        await Products.navigateToProducts();
+    test('3. Verify Add Products in Cart', async ({ page, productsPage, cartPage }) => {
+        await productsPage.navigateToProducts();
         
         // Add products
         const productToAdd = 2;
         for (let i=0; i<productToAdd; i++) {
-            await Products.productCard.nth(i).hover();
-            await Products.addToCartBtn.nth(i).click();
-            await expect(Products.addToCartModal).toBeVisible();
-            await Products.continueBtn.click();
+            await productsPage.productCard.nth(i).hover();
+            await productsPage.addToCartBtn.nth(i).click();
+            await expect(productsPage.addToCartModal).toBeVisible();
+            await productsPage.continueBtn.click();
         }
         
-        await Cart.viewCart.click();
+        await cartPage.viewCart.click();
         await page.waitForURL(/view_cart/);
-        await expect (Cart.productItem).toHaveCount(productToAdd);
+        await expect (cartPage.productItem).toHaveCount(productToAdd);
     })
 
-    test('4. Verify Product quantity in Cart', async ({ page }) => {
-        const Products = new ProductsPage(page);
-        const Cart = new CartPage(page)
-        
+    test('4. Verify Product quantity in Cart', async ({ page, productsPage, cartPage }) => {        
         const quantity = "4";
-        await Products.viewProductBtn.nth(0).click();
+        await productsPage.viewProductBtn.nth(0).click();
         await page.waitForURL(/product_details/);
-        await Products.productQuantity.fill(quantity, {force: true});
-        await Products.prodAddToCart.click()
-        await expect(Products.addToCartModal).toBeVisible();
-        await Products.viewCartBtn.click();
+        await productsPage.productQuantity.fill(quantity, {force: true});
+        await productsPage.prodAddToCart.click()
+        await expect(productsPage.addToCartModal).toBeVisible();
+        await productsPage.viewCartBtn.click();
 
         await page.waitForURL(/view_cart/);
-        await expect(Cart.productQuantity).toHaveText(quantity)
+        await expect(cartPage.productQuantity).toHaveText(quantity)
     })
     
     
